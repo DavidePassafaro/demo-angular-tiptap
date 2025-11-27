@@ -1,0 +1,89 @@
+.comments-section {
+  margin-top: 40px;
+  border-top: 2px solid #e1e5e9;
+  padding-top: 20px;
+}
+
+.new-comment {
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.comments-list {
+  margin-bottom: 30px;
+}
+
+.comment-item {
+  margin-bottom: 20px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f6f8fa;
+  border-bottom: 1px solid #e1e5e9;
+  font-size: 14px;
+}
+
+.comment-date {
+  color: #656d76;
+  margin-left: auto;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.edit-btn {
+  background: #0969da;
+  color: white;
+}
+
+.edit-btn:hover:not(:disabled) {
+  background: #0860ca;
+}
+
+.edit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.delete-btn {
+  background: #cf222e;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #bc2139;
+}
+
+.no-comments {
+  color: #656d76;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.readonly-example {
+  padding: 20px;
+  background: #f0f6ff;
+  border-radius: 8px;
+  border-left: 4px solid #0969da;
+}
+
+h3,
+h4 {
+  margin-top: 0;
+  color: #24292f;
+}

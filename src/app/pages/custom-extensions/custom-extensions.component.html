@@ -1,0 +1,64 @@
+<div class="page-container">
+  <h2>Custom Extensions</h2>
+
+  <app-editor [customExtensions]="customExtensions"></app-editor>
+
+  <div class="comments-section">
+    <!-- Nuovo commento -->
+    <div class="new-comment">
+      <h4>Inserisci un nuovo commento:</h4>
+
+      <app-comment-editor
+        [readOnly]="false"
+        [placeholder]="'Scrivi il tuo commento qui...'"
+        [maxLength]="300"
+        [showToolbar]="true"
+        [customExtensions]="customExtensions"
+        [(content)]="newCommentContent"
+        (onSubmit)="addComment($event)"
+        (onCancel)="cancelNewComment()"
+      />
+    </div>
+
+    <!-- Lista commenti esistenti -->
+    <div class="comments-list">
+      <h4>Commenti ({{ comments().length }}):</h4>
+
+      @for(comment of comments(); track comment.id) {
+      <div class="comment-item">
+        <div class="comment-header">
+          <strong>{{ comment.author }}</strong>
+
+          <span class="comment-date">{{ formatDate(comment.timestamp) }}</span>
+
+          <button
+            class="edit-btn"
+            (click)="startEditing(comment)"
+            [disabled]="editingCommentId() === comment.id"
+          >
+            {{ editingCommentId() === comment.id ? 'Modifica in corso...' : 'Modifica' }}
+          </button>
+
+          <button class="delete-btn" (click)="deleteComment(comment.id)">Elimina</button>
+        </div>
+
+        @if (editingCommentId() === comment.id) {
+        <app-comment-editor
+          [readOnly]="false"
+          [placeholder]="'Modifica il tuo commento...'"
+          [maxLength]="300"
+          [showToolbar]="true"
+          [(content)]="editingContent"
+          (onSubmit)="saveEdit(comment.id)"
+          (onCancel)="cancelEdit()"
+        />
+        } @else {
+        <app-comment-editor [readOnly]="true" [content]="comment.content" [showToolbar]="false" />
+        }
+      </div>
+      } @empty {
+      <p class="no-comments">Nessun commento ancora. Sii il primo a commentare!</p>
+      }
+    </div>
+  </div>
+</div>

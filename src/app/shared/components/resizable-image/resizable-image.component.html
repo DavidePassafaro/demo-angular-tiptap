@@ -1,0 +1,45 @@
+<div class="resizable-image-wrapper" (click)="onImageClick()">
+  <img
+    [src]="node.attrs.src"
+    [alt]="node.attrs.alt || ''"
+    [style.width.px]="currentWidth()"
+    class="resizable-image"
+    [class.is-selected]="isSelected()"
+  />
+  
+  @if (isSelected()) {
+  <div class="image-controls">
+    <div class="resize-handle" (mousedown)="onResizeStart($event)">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <polyline points="9 21 3 21 3 15"></polyline>
+        <line x1="21" y1="3" x2="14" y2="10"></line>
+        <line x1="3" y1="21" x2="10" y2="14"></line>
+      </svg>
+    </div>
+    <button type="button" class="remove-button" (click)="removeImage()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      </svg>
+      Remove
+    </button>
+  </div>
+  }
+</div>

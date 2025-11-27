@@ -1,0 +1,150 @@
+<div class="editor-container">
+  <div class="control-group">
+    @if (editor()) {
+    <div class="button-group">
+      @if(editor().can().chain().focus().toggleBold().run()) {
+      <button
+        (click)="editor().chain().focus().toggleBold().run()"
+        [disabled]="!editor().can().chain().focus().toggleBold().run()"
+        [class.is-active]="editor().isActive('bold')"
+      >
+        Bold
+      </button>
+      } @if(editor().can().chain().focus().toggleItalic().run()) {
+      <button
+        (click)="editor().chain().focus().toggleItalic().run()"
+        [disabled]="!editor().can().chain().focus().toggleItalic().run()"
+        [class.is-active]="editor().isActive('italic')"
+      >
+        Italic
+      </button>
+      } @if(editor().can().chain().focus().toggleStrike().run()) {
+      <button
+        (click)="editor().chain().focus().toggleStrike().run()"
+        [disabled]="!editor().can().chain().focus().toggleStrike().run()"
+        [class.is-active]="editor().isActive('strike')"
+      >
+        Strike
+      </button>
+      } @if(editor().can().chain().focus().toggleUnderline().run()) {
+      <button
+        (click)="editor().chain().focus().toggleUnderline().run()"
+        [disabled]="!editor().can().chain().focus().toggleUnderline().run()"
+        [class.is-active]="editor().isActive('underline')"
+      >
+        Underline
+      </button>
+      } @if(editor().can().chain().focus().toggleCode().run()) {
+      <button
+        (click)="editor().chain().focus().toggleCode().run()"
+        [disabled]="!editor().can().chain().focus().toggleCode().run()"
+        [class.is-active]="editor().isActive('code')"
+      >
+        Code
+      </button>
+      } @if(editor().can().chain().focus().unsetAllMarks().run()) {
+      <button (click)="editor().chain().focus().unsetAllMarks().run()">Clear marks</button>
+      } @if(editor().can().chain().focus().clearNodes().run()) {
+      <button (click)="editor().chain().focus().clearNodes().run()">Clear nodes</button>
+      } @if(editor().can().chain().focus().setParagraph().run()) {
+      <button
+        (click)="editor().chain().focus().setParagraph().run()"
+        [class.is-active]="editor().isActive('paragraph')"
+      >
+        Paragraph
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 1 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 1 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 1 })"
+      >
+        H1
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 2 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 2 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 2 })"
+      >
+        H2
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 3 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 3 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 3 })"
+      >
+        H3
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 4 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 4 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 4 })"
+      >
+        H4
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 5 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 5 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 5 })"
+      >
+        H5
+      </button>
+      } @if(editor().can().chain().focus().toggleHeading({ level: 6 }).run()) {
+      <button
+        (click)="editor().chain().focus().toggleHeading({ level: 6 }).run()"
+        [class.is-active]="editor().isActive('heading', { level: 6 })"
+      >
+        H6
+      </button>
+      } @if(editor().can().chain().focus().toggleBulletList().run()) {
+      <button
+        (click)="editor().chain().focus().toggleBulletList().run()"
+        [class.is-active]="editor().isActive('bulletList')"
+      >
+        Bullet list
+      </button>
+      } @if(editor().can().chain().focus().toggleOrderedList().run()) {
+      <button
+        (click)="editor().chain().focus().toggleOrderedList().run()"
+        [class.is-active]="editor().isActive('orderedList')"
+      >
+        Ordered list
+      </button>
+      } @if(editor().can().chain().focus().toggleCodeBlock().run()) {
+      <button
+        (click)="editor().chain().focus().toggleCodeBlock().run()"
+        [class.is-active]="editor().isActive('codeBlock')"
+      >
+        Code block
+      </button>
+      } @if(editor().can().chain().focus().toggleBlockquote().run()) {
+      <button
+        (click)="editor().chain().focus().toggleBlockquote().run()"
+        [class.is-active]="editor().isActive('blockquote')"
+      >
+        Blockquote
+      </button>
+      } @if(editor().can().chain().focus().setHorizontalRule().run()) {
+      <button (click)="editor().chain().focus().setHorizontalRule().run()">Horizontal rule</button>
+      } @if(editor().can().chain().focus().setHardBreak().run()) {
+      <button (click)="editor().chain().focus().setHardBreak().run()">Hard break</button>
+      } @if(editor().can().chain().focus().undo().run()) {
+      <button
+        (click)="editor().chain().focus().undo().run()"
+        [disabled]="!editor().can().chain().focus().undo().run()"
+      >
+        Undo
+      </button>
+      } @if(editor().can().chain().focus().redo().run()) {
+      <button
+        (click)="editor().chain().focus().redo().run()"
+        [disabled]="!editor().can().chain().focus().redo().run()"
+      >
+        Redo
+      </button>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="editor-content" #editorElement></div>
+</div>

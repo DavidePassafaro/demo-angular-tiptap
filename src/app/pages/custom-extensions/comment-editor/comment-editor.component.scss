@@ -1,0 +1,381 @@
+.comment-editor-container {
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  
+  &:focus-within {
+    border-color: #0969da;
+    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+  }
+
+  &.read-only {
+    background: #f6f8fa;
+    border-color: #d1d9e0;
+    
+    .comment-editor {
+      cursor: default;
+    }
+  }
+}
+
+// Toolbar styles
+.comment-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e1e5e9;
+  background: #f6f8fa;
+  border-radius: 8px 8px 0 0;
+
+  .toolbar-group {
+    display: flex;
+    gap: 4px;
+  }
+
+  .toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: #d1d9e0;
+    margin: 0 4px;
+  }
+
+  .toolbar-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #656d76;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: #f3f4f6;
+      color: #24292f;
+    }
+
+    &.is-active {
+      background: #0969da;
+      color: white;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Editor styles
+.comment-editor {
+  padding: 12px;
+  min-height: 80px;
+  max-height: 300px;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #24292f;
+
+  // Reset prosemirror styles
+  .ProseMirror {
+    outline: none;
+    min-height: 56px;
+
+    p {
+      margin: 0 0 8px 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: #656d76;
+        pointer-events: none;
+        height: 0;
+      }
+    }
+
+    // List styles
+    ul.comment-list,
+    ol.comment-list {
+      margin: 8px 0;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 4px;
+        
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    ul.comment-list {
+      list-style-type: disc;
+    }
+
+    ol.comment-list {
+      list-style-type: decimal;
+    }
+
+    // Inline formatting
+    strong {
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    s {
+      text-decoration: line-through;
+    }
+
+    // Code inline
+    code {
+      padding: 2px 4px;
+      background: rgba(175, 184, 193, 0.2);
+      border-radius: 3px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 12px;
+    }
+  }
+
+  &.focused {
+    .ProseMirror p.is-editor-empty:first-child::before {
+      color: #8c959f;
+    }
+  }
+
+  &.has-content {
+    .ProseMirror p.is-editor-empty:first-child::before {
+      display: none;
+    }
+  }
+}
+
+// Footer styles
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid #e1e5e9;
+  background: #f6f8fa;
+  border-radius: 0 0 8px 8px;
+
+  .comment-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+
+    .character-count {
+      color: #656d76;
+
+      &.exceeded {
+        color: #cf222e;
+        font-weight: 500;
+      }
+    }
+
+    .error-message {
+      color: #cf222e;
+      font-weight: 500;
+    }
+  }
+
+  .comment-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    .cancel-button {
+      background: transparent;
+      color: #656d76;
+      border-color: #d1d9e0;
+
+      &:hover:not(:disabled) {
+        background: #f3f4f6;
+        border-color: #afb8c1;
+      }
+    }
+
+    .submit-button {
+      background: #1f883d;
+      color: white;
+      border-color: #1f883d;
+
+      &:hover:not(:disabled) {
+        background: #1a7f37;
+        border-color: #1a7f37;
+      }
+
+      &:disabled {
+        background: #94d3a2;
+        border-color: #94d3a2;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .comment-toolbar {
+    padding: 6px 8px;
+    
+    .toolbar-button {
+      width: 24px;
+      height: 24px;
+      font-size: 11px;
+    }
+  }
+
+  .comment-editor {
+    padding: 10px;
+    font-size: 13px;
+    min-height: 70px;
+  }
+
+  .comment-footer {
+    padding: 6px 8px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+
+    .comment-actions {
+      justify-content: flex-end;
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .comment-editor-container {
+    background: #0d1117;
+    border-color: #30363d;
+
+    &:focus-within {
+      border-color: #58a6ff;
+      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+    }
+
+    &.read-only {
+      background: #161b22;
+      border-color: #21262d;
+    }
+  }
+
+  .comment-toolbar {
+    background: #161b22;
+    border-color: #30363d;
+
+    .toolbar-separator {
+      background: #30363d;
+    }
+
+    .toolbar-button {
+      color: #7d8590;
+
+      &:hover:not(:disabled) {
+        background: #262c36;
+        color: #e6edf3;
+      }
+
+      &.is-active {
+        background: #0969da;
+        color: white;
+      }
+    }
+  }
+
+  .comment-editor {
+    color: #e6edf3;
+
+    .ProseMirror {
+      p.is-editor-empty:first-child::before {
+        color: #7d8590;
+      }
+
+      code {
+        background: rgba(240, 246, 252, 0.1);
+      }
+    }
+
+    &.focused {
+      .ProseMirror p.is-editor-empty:first-child::before {
+        color: #8b949e;
+      }
+    }
+  }
+
+  .comment-footer {
+    background: #161b22;
+    border-color: #30363d;
+
+    .comment-info {
+      .character-count {
+        color: #7d8590;
+
+        &.exceeded {
+          color: #f85149;
+        }
+      }
+
+      .error-message {
+        color: #f85149;
+      }
+    }
+
+    .comment-actions {
+      .cancel-button {
+        color: #7d8590;
+        border-color: #30363d;
+
+        &:hover:not(:disabled) {
+          background: #262c36;
+          border-color: #6e7681;
+        }
+      }
+
+      .submit-button {
+        background: #238636;
+        border-color: #238636;
+
+        &:hover:not(:disabled) {
+          background: #2ea043;
+          border-color: #2ea043;
+        }
+
+        &:disabled {
+          background: #2d4237;
+          border-color: #2d4237;
+        }
+      }
+    }
+  }
+}

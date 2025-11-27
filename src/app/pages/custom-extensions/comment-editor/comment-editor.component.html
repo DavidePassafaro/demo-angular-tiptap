@@ -1,0 +1,114 @@
+<div class="comment-editor-container" [class.read-only]="readOnly()">
+  <!-- Toolbar per la formattazione -->
+  @if (showToolbar() && !readOnly()) {
+    <div class="comment-toolbar">
+      <div class="toolbar-group">
+        <button
+          type="button"
+          class="toolbar-button"
+          [class.is-active]="isActive('bold')"
+          [disabled]="!canExecute('bold')"
+          (click)="toggleBold()"
+          title="Grassetto"
+        >
+          <strong>B</strong>
+        </button>
+        
+        <button
+          type="button"
+          class="toolbar-button"
+          [class.is-active]="isActive('italic')"
+          [disabled]="!canExecute('italic')"
+          (click)="toggleItalic()"
+          title="Corsivo"
+        >
+          <em>I</em>
+        </button>
+        
+        <button
+          type="button"
+          class="toolbar-button"
+          [class.is-active]="isActive('strike')"
+          [disabled]="!canExecute('strike')"
+          (click)="toggleStrike()"
+          title="Barrato"
+        >
+          <s>S</s>
+        </button>
+      </div>
+      
+      <div class="toolbar-separator"></div>
+      
+      <div class="toolbar-group">
+        <button
+          type="button"
+          class="toolbar-button"
+          [class.is-active]="isActive('bulletList')"
+          [disabled]="!canExecute('bulletList')"
+          (click)="toggleBulletList()"
+          title="Elenco puntato"
+        >
+          •
+        </button>
+        
+        <button
+          type="button"
+          class="toolbar-button"
+          [class.is-active]="isActive('orderedList')"
+          [disabled]="!canExecute('orderedList')"
+          (click)="toggleOrderedList()"
+          title="Elenco numerato"
+        >
+          1.
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Editor container -->
+  <div 
+    class="comment-editor" 
+    #editorElement
+    [class.focused]="editor()?.isFocused"
+    [class.has-content]="getTextContent().trim().length > 0"
+  ></div>
+
+  <!-- Footer con contatore caratteri e pulsanti -->
+  @if (!readOnly()) {
+    <div class="comment-footer">
+      <div class="comment-info">
+        @if (maxLength()) {
+          <span class="character-count" [class.exceeded]="isMaxLengthExceeded()">
+            {{ getCharacterCount() }}/{{ maxLength() }}
+          </span>
+        }
+        
+        @if (isMaxLengthExceeded()) {
+          <span class="error-message">
+            Limite caratteri superato
+          </span>
+        }
+      </div>
+
+      <div class="comment-actions">
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cancelComment()"
+          [disabled]="getTextContent().trim().length === 0"
+        >
+          Annulla
+        </button>
+        
+        <button
+          type="button"
+          class="submit-button"
+          (click)="submitComment()"
+          [disabled]="!canSubmit()"
+        >
+          Pubblica
+        </button>
+      </div>
+    </div>
+  }
+</div>

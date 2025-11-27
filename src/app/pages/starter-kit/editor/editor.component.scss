@@ -1,0 +1,96 @@
+.editor-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+button {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f5f5f5;
+}
+
+button.is-active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ProseMirror {
+  outline: none;
+  min-height: 150px;
+}
+
+/* Basic editor styles */
+.ProseMirror p {
+  margin: 0 0 1em 0;
+}
+
+/* Rainbow text effect */
+.rainbow-text {
+  background: linear-gradient(
+    90deg,
+    #ff0000 0%,    /* Red */
+    #ff8c00 16.66%, /* Orange */
+    #ffd700 33.33%, /* Gold */
+    #00ff00 50%,    /* Green */
+    #00bfff 66.66%, /* Deep Sky Blue */
+    #4169e1 83.33%, /* Royal Blue */
+    #9932cc 100%    /* Dark Violet */
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: rainbow-animation 3s linear infinite;
+  font-weight: bold;
+}
+
+@keyframes rainbow-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Fallback for older browsers */
+@supports not (-webkit-background-clip: text) {
+  .rainbow-text {
+    color: #ff0000;
+    background: none;
+    animation: rainbow-fallback 3s linear infinite;
+  }
+  
+  @keyframes rainbow-fallback {
+    0% { color: #ff0000; }
+    16.66% { color: #ff8c00; }
+    33.33% { color: #ffd700; }
+    50% { color: #00ff00; }
+    66.66% { color: #00bfff; }
+    83.33% { color: #4169e1; }
+    100% { color: #9932cc; }
+  }
+}
